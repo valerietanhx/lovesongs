@@ -1,0 +1,307 @@
+* {
+    font-family: 'EB Garamond', serif;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    background-image: url('../img/sky.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+::selection {
+    background: black;
+    color: white;
+}
+
+::placeholder {
+    color: rgb(0, 0, 0, 0.4);
+}
+
+.glass {
+    /* from https://css.glass */
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+#navbar {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+#navbar__container {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(119,155,185,0.9) 0%, rgba(62,126,170,0) 100%);
+    height: 80px;
+}
+
+#navbar__links {
+    display: flex;
+}
+
+.navbar__link {
+    margin: 0px 30px;
+}
+
+.navbar__link a {
+    transition: ease 1s;
+}
+
+.navbar__link a:hover {
+    text-shadow: 0 0 20px white, 0 0 20px white;
+}
+
+.pseudolink {
+    cursor: pointer;
+}
+
+.link-toggle {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#reset-wrapper {
+    margin-left: -8px;
+}
+
+#reset-button {
+    padding: 1px 12px;
+    font-size: 15px;
+    transition: ease 1s;
+    background: rgba(255, 255, 255, 0.36);
+    color: rgb(75, 75, 75);
+}
+
+#reset-button:hover {
+    background: rgba(255, 255, 255, 0.72);
+}
+
+#search-wrapper {
+    margin-left: -60px;
+}
+
+#search {
+    display: flex;
+    background: none;
+}
+
+#search-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 75px;
+    font-size: 15px;
+    color: rgb(75, 75, 75);
+    background:rgba(255, 255, 255, 0.4);
+    border: none;
+    padding-left: 4px;
+}
+
+#search-box {
+    padding: 0px 4px;
+    background: rgba(255, 255, 255, 0.18);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    width: 130px;
+}
+
+#stories {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 16px;
+    margin: 32px 32px;
+}
+
+@media (max-width: 1200px) {
+    #stories {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 850px) {
+    #stories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 675px) {
+    #stories {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #navbar__container {
+        flex-direction: column;
+        background: none;
+    }
+
+    #navbar__links {
+        width: 100%;
+        justify-content: center;
+        padding: 30px 0px;
+        background: linear-gradient(180deg, rgba(119,155,185,0.9) 0%, rgba(62,126,170,0) 100%);
+    }
+
+    #reset-wrapper {
+        margin-left: 0px;
+    }
+
+    #search-wrapper {
+        margin-left: 0px;
+        margin-top: -24px;
+    }
+}
+
+.story-home {
+    padding: 16px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 200px;
+}
+
+.story__artist::before {
+    content: "ARTIST: ";
+}
+
+.story__song::before {
+    content: "SONG: ";
+}
+
+.story__memory {
+    margin: 10px 0px;
+    width: 100%;
+    height: 100px;
+    overflow-y: scroll;
+}
+
+.story__author {
+    text-align: right;
+}
+
+.story__author::before {
+    content: "—";
+}
+
+.submit-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+}
+
+#story-submit {
+    width: 100%;
+    padding: 16px 16px;
+}
+
+.form-input {
+    width: 100%;
+    border-bottom: 1px solid black;
+    /* margin-bottom: 20px; */
+}
+
+.div-margin-top {
+    margin-top: 20px;
+}
+
+.autocomplete {
+    position: relative;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 9999;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 5px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: rgba(119,155,185) !important;
+    color: #ffffff;
+}
+
+#submit__memory {
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+
+textarea {
+    width: 100%;
+    height: 200px;
+    resize: none;
+    border: 1px solid black;
+    box-sizing: border-box;
+    padding: 5px 5px;
+}
+
+#submit__btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+#submit__btn {
+    border-radius: 6px;
+    transition: ease 1s;
+    padding: 4px 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+#submit__btn:hover {
+    background: rgba(119,155,185);
+}
+
+#success-message {
+    font-size: 20px;
+    transition: opacity 2s ease;
+    animation: fadeIn 3s;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 30px 0px;
+    z-index: -1;
+}
+
+#index-footer {
+    position: relative; /* override footer styling above for index.html */
+}
+/* eh but i feel like i want it always at the bottom.
+then if it gets pushed down it gets pushed down. uk? */

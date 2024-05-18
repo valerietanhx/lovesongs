@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤍</text></svg>"
+    />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap"
+      rel="stylesheet"
+    />
+    <title>LOVESONGS</title>
+  </head>
+  <body>
+    <nav id="navbar">
+      <div id="navbar__container">
+        <ul id="navbar__links">
+          <li class="navbar__link"><a href="index.html">LISTEN</a></li>
+          <li class="navbar__link"><a href="submit.html">SING</a></li>
+          <li class="navbar__link pseudolink">
+            <a onclick="getRandomStory()">WANDER</a>
+          </li>
+          <li class="navbar__link pseudolink">
+            <a onclick="toggleSearchBar()">SEEK</a>
+          </li>
+        </ul>
+        <div class="link-toggle" id="reset-wrapper">
+          <button id="reset-button" class="glass" onclick="resetRandom()">
+            Reset
+          </button>
+        </div>
+        <div class="link-toggle" id="search-wrapper">
+          <div id="search" class="glass">
+            <select id="search-filter">
+              <option value="all" selected>All</option>
+              <option value="artist">Artist</option>
+              <option value="song">Song</option>
+              <option value="memory">Memory</option>
+              <option value="author">Author</option>
+            </select>
+            <input
+              autocomplete="off"
+              id="search-box"
+              type="text"
+              placeholder="..."
+              onkeyup="searchStories()"
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <div id="stories">
+        <!-- <div class="glass story-home">
+                <p class="story__artist">placeholder</p>
+                <p class="story__song">placeholder</p>
+                <p class="story__memory">placeholder</p>
+                <p class="story__author">placeholder</p>
+            </div> -->
+      </div>
+    </main>
+    <footer id="index-footer">
+      <p>© 2023 LOVESONGS. MADE WITH LOVE.</p>
+    </footer>
+    <script src="js/script.js"></script>
+  </body>
+</html>
