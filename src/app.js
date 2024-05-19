@@ -2,9 +2,16 @@ require("dotenv").config();
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const { Pool } = require("pg");
 const cors = require("cors");
-const Story = require("../models/story");
+
+const pool = new Pool({
+  user: process.env.POSTGRESQL_USER,
+  host: process.env.POSTGRESQL_HOST,
+  database: "lovesongs",
+  password: process.env.POSTGRESQL_PASSWORD,
+  port: 5432,
+});
 
 const app = express();
 const port = 3000;
@@ -12,27 +19,16 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-const uri = process.env.MONGODB_CONNECTION_STRING;
-mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
 app.get("/", (req, res) => {
   res.send("All good!");
 });
 
 app.get("/stories", async (req, res) => {
   try {
-    const stories = await Story.find();
-    res.json(stories);
+    const result = await pool.query(
+      "SELECT * FROM stories ORDER BY created_at DESC"
+    );
+    res.json(result.rows);
   } catch (err) {
     console.error(err);
     res.status(500).send("Error fetching stories.");
@@ -41,7 +37,11 @@ app.get("/stories", async (req, res) => {
 
 app.post("/submit", async (req, res) => {
   try {
-    await Story.create(req.body);
+    const { author, artist, song, memory } = req.body;
+    const result = await pool.query(
+      "INSERT INTO stories VALUES ($1, $2, $3, $4, now())",
+      [author, artist, song, memory]
+    );
     return res.redirect("http://localhost:5500/public/submitted.html");
   } catch (err) {
     console.error(err);
