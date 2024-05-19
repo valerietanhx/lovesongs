@@ -26,13 +26,14 @@
         </div>
       </ul>
     </nav>
-    <div class="submit-container">
+    <div id="submit-container">
       <form
         autocomplete="off"
         action="http://localhost:3000/submit"
         method="post"
         class="glass"
         id="story-submit"
+        onsubmit="showSubmitSuccessMessage()"
       >
         <fieldset>
           <div>

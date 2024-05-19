@@ -38,15 +38,13 @@ app.get("/stories", async (req, res) => {
 app.post("/submit", async (req, res) => {
   try {
     const { author, artist, song, memory } = req.body;
-    const result = await pool.query(
+    pool.query(
       "INSERT INTO stories VALUES ($1, $2, $3, $4, now())",
       [author, artist, song, memory]
     );
-    return res.redirect("http://localhost:5500/public/submitted.html");
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: err.message });
-    // TODO: update
   }
 });
 

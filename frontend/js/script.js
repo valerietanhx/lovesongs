@@ -22,11 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function getRandomStory() {
   stories = document.getElementsByClassName("story-home");
-  console.log(stories);
   randomIndex = Math.floor(Math.random() * stories.length);
-  console.log(randomIndex);
   for (i = 0; i < stories.length; i++) {
-    console.log(stories[i]);
     if (i != randomIndex) {
       stories[i].style.display = "none";
     } else {
@@ -139,4 +136,16 @@ function searchStories() {
       story.style.display = "none";
     }
   }
+}
+
+function showSubmitSuccessMessage() {
+  const submitContainer = document.getElementById("submit-container");
+  let form = document.getElementById("story-submit");
+  form.style.display = "none";
+
+  const successMessage = document.createElement("p");
+  successMessage.id = "success-message";
+  successMessage.innerText =
+    "⋆⁺₊⋆ Your song has been released into the night. ⋆⁺₊⋆";
+  submitContainer.appendChild(successMessage);
 }
