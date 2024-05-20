@@ -6,11 +6,11 @@ const { Pool } = require("pg");
 const cors = require("cors");
 
 const pool = new Pool({
-  user: process.env.POSTGRESQL_USER,
-  host: process.env.POSTGRESQL_HOST,
-  database: process.env.POSTGRESQL_DATABASE,
-  password: process.env.POSTGRESQL_PASSWORD,
-  port: process.env.POSTGRESQL_PORT,
+  user: process.env.POSTGRES_USER,
+  host: process.env.POSTGRES_HOST,
+  database: process.env.POSTGRES_DB,
+  password: process.env.POSTGRES_PASSWORD,
+  port: process.env.POSTGRES_PORT,
 });
 
 const app = express();
@@ -18,6 +18,8 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.send("All good!");
@@ -48,6 +50,14 @@ app.post("/submit", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+(async () => {
+  await pool.connect();
+
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+})();
+
+// app.listen(port, () => {
+//   console.log(`Server is running on http://localhost:${port}`);
+// });

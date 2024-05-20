@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    depends_on:
+      - database
+    ports:
+      - "3000:3000"
+
+  database:
+    image: postgres:16-alpine
+    env_file:
+      - .env
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

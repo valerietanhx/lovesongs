@@ -1,7 +1,7 @@
 // index.html
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://localhost:3000/stories")
+  fetch("/stories")
     .then((response) => response.json())
     .then((stories) => {
       const storyContainer = document.getElementById("stories");
