@@ -4,6 +4,18 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("/stories?offset=0")
     .then((response) => response.json())
     .then((stories) => addStories(stories));
+
+  fetch("/count")
+    .then((response) => response.json())
+    .then((count) => {
+      if (count) {
+        const mainContainer = document.getElementsByTagName("main")[0];
+        const countDiv = document.createElement("div");
+        countDiv.innerText = `${count[0]["count"]} stories found`;
+        countDiv.style.fontStyle = "italic";
+        mainContainer.insertBefore(countDiv, mainContainer.firstChild);
+      }
+    });
 });
 
 window.addEventListener("scroll", () => {

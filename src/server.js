@@ -23,6 +23,16 @@ app.get("/", (req, res) => {
   res.send("All good!");
 });
 
+app.get("/count", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT COUNT(*) FROM stories");
+    return res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    return []; // not a big deal if count not fetched successfully, just don't display
+  }
+});
+
 app.get("/stories", async (req, res) => {
   offset = req.query.offset || 0;
 
