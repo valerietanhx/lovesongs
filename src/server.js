@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const { Pool } = require("pg");
-const cors = require("cors");
 
 const pool = new Pool({
   user: process.env.POSTGRES_USER,
@@ -17,7 +16,6 @@ const app = express();
 const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 
 app.use(express.static("public"));
 
@@ -30,20 +28,22 @@ app.get("/stories", async (req, res) => {
     const result = await pool.query(
       "SELECT * FROM stories ORDER BY created_at DESC"
     );
-    res.json(result.rows);
+    return res.json(result.rows);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error fetching stories.");
+    return res.status(500).json({ message: err.message });
   }
 });
 
 app.post("/submit", async (req, res) => {
   try {
     const { author, artist, song, memory } = req.body;
-    pool.query(
-      "INSERT INTO stories VALUES ($1, $2, $3, $4, now())",
-      [author, artist, song, memory]
-    );
+    pool.query("INSERT INTO stories VALUES ($1, $2, $3, $4, now())", [
+      author,
+      artist,
+      song,
+      memory,
+    ]);
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: err.message });
@@ -57,7 +57,3 @@ app.post("/submit", async (req, res) => {
     console.log(`Server is running on http://localhost:${port}`);
   });
 })();
-
-// app.listen(port, () => {
-//   console.log(`Server is running on http://localhost:${port}`);
-// });
