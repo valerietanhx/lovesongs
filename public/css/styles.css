@@ -182,6 +182,7 @@ body {
   flex-direction: column;
   justify-content: center;
   min-width: 200px;
+  transition: ease 1s;
 }
 
 .story__artist::before {

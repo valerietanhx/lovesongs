@@ -24,9 +24,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/stories", async (req, res) => {
+  offset = req.query.offset || 0;
+
   try {
     const result = await pool.query(
-      "SELECT * FROM stories ORDER BY created_at DESC"
+      `SELECT * FROM stories ORDER BY created_at DESC LIMIT 12 OFFSET ${offset}`
     );
     return res.json(result.rows);
   } catch (err) {

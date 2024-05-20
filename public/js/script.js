@@ -1,24 +1,36 @@
 // index.html
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("/stories")
+  fetch("/stories?offset=0")
     .then((response) => response.json())
-    .then((stories) => {
-      const storyContainer = document.getElementById("stories");
+    .then((stories) => addStories(stories));
+});
 
-      stories.forEach((story) => {
-        const card = document.createElement("div");
-        card.className = "glass story-home";
-        card.innerHTML = `
+window.addEventListener("scroll", () => {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  cards = document.getElementsByClassName("story-home");
+  if (scrollTop + clientHeight >= scrollHeight - 5) {
+    fetch(`/stories?offset=${cards.length}`)
+      .then((response) => response.json())
+      .then((stories) => addStories(stories));
+  }
+});
+
+function addStories(stories) {
+  const storyContainer = document.getElementById("stories");
+
+  stories.forEach((story) => {
+    const card = document.createElement("div");
+    card.className = "glass story-home";
+    card.innerHTML = `
           <p class="story__artist">${story.artist}</p>
           <p class="story__song">${story.song}</p>
           <p class="story__memory">${story.memory}</p>
           <p class="story__author">${story.author}</p>
         `;
-        storyContainer.appendChild(card);
-      });
-    });
-});
+    storyContainer.appendChild(card);
+  });
+}
 
 function getRandomStory() {
   stories = document.getElementsByClassName("story-home");
@@ -137,6 +149,8 @@ function searchStories() {
     }
   }
 }
+
+// submit.html
 
 function showSubmitSuccessMessage() {
   const submitContainer = document.getElementById("submit-container");
