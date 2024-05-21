@@ -6,7 +6,6 @@ services:
       - database
     ports:
       - "3000:3000"
-    restart: always
 
   database:
     image: postgres:16-alpine
