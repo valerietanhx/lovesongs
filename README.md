@@ -1,10 +1,14 @@
 # lovesongs
 
+<img width="1508" alt="index" src="https://github.com/valerietanhx/lovesongs/assets/110474344/9915cff9-e7cb-44cf-aaf9-7a7a1a30b1b7">
+
 A website for people to share their memories associated with songs.
 
 My first attempt at full-stack web development. Inspired by [Chia Amisola](https://chia.design/)'s [The Sound of Love](https://thesoundof.love/) and [Rora Blue](https://www.rorablue.com/)'s [Unsent Project](https://theunsentproject.com/), as well as the songs that I can't listen to without remembering a specific moment in time.
 
 _While this repository was created in May 2024, most of the code here was first written in August 2023, when I was still very, very new to web development. Happy with it regardless... with everything I build I aim to learn + be creative (in concept, design, etc.) + have fun, all of which I feel were accomplished here :)_
+
+
 
 ## Setup
 
