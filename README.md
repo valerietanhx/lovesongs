@@ -8,8 +8,6 @@ My first attempt at full-stack web development. Inspired by [Chia Amisola](https
 
 _While this repository was created in May 2024, most of the code here was first written in August 2023, when I was still very, very new to web development. Happy with it regardless... with everything I build I aim to learn + be creative (in concept, design, etc.) + have fun, all of which I feel were accomplished here :)_
 
-
-
 ## Setup
 
 For those who wish to build on the app or run it locally as a personal archive.
